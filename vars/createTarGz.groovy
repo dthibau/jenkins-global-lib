@@ -8,10 +8,8 @@ def call(Map config) {
 
     echo "Création d'une distribution tar.gz à partir de $sourceDir avec les extensions : ${extensions.join(', ')}"
 
-    // Créez une chaîne de filtres pour rechercher plusieurs extensions
-    def extensionFilter = extensions.collect { ext -> "--include=\"*.$ext\"" }.join(' ')
 
     // Utilisez des commandes shell pour créer le tar.gz
     sh "mkdir -p $outputDir"
-    sh "tar -czvf $outputDir/${outputFile}.tar.gz -C $sourceDir $extensionFilter ."
+    sh "find $sourceDir -type f -name '*.${extensions.join("' -o -name *.'")}' | tar -czvf $outputDir/${outputFile}.tar.gz -T -"
 }
