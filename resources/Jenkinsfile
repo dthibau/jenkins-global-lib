@@ -1,0 +1,9 @@
+// my-shared-library/resources/Jenkinsfile
+
+@Library('my-shared-library') _
+
+createTarGz(
+    sourceDir: '/chemin/vers/votre/repertoire',
+    extensions: ['extension1', 'extension2'],
+    outputDir: '/chemin/vers/le/dossier/de/sortie'
+)
